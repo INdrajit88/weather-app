@@ -1,7 +1,9 @@
 const express = require("express");
 const https = require("https");
 const bodyParser= require("body-parser");
+const config = require("./config.js");
 const app = express();
+
 app.use(bodyParser.urlencoded({extended:true}));
 app.get("/" , function ( req , res ){
     res.sendFile(__dirname + "/index.html")
@@ -9,8 +11,8 @@ app.get("/" , function ( req , res ){
 });
 app.post("/",function(req,res){
     const query=req.body.cityName;
-    const apiKey="2d298e264aab0850851489d586e70c36";
-    const url="https://api.openweathermap.org/data/2.5/weather?q="+ query +"&units=metric&appid="+apiKey;
+    const key=config.apiKey;
+    const url="https://api.openweathermap.org/data/2.5/weather?q="+ query +"&units=metric&appid="+key;
     https.get(url,function(response){
         console.log("The status code is: " + response.statusCode);
         response.on("data",function(data){
