@@ -1,0 +1,31 @@
+<%- include("head"); %>
+
+
+<body>
+    <div class="widget">
+
+        <div class="left-panel panel">
+            <div class='date'>
+                <%= time %>
+            </div>
+            <div class='city'> 
+                <%= cityName %>
+             </div> 
+            <div class="left-panel panel">
+                <div class='date'>
+                    <%= weatherDescription %>
+                </div>
+             <div class="temp"> 
+                <%= temperature %> &deg;C
+            </div> 
+            
+        </div>
+        <div class="right-panel panel">
+            <img src="<%= imageUrl %>" alt="" width="160">
+        </div>
+
+    </div>
+
+</body>
+
+</html>
