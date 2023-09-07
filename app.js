@@ -1,7 +1,7 @@
 const express = require("express");
 const https = require("https");
 const bodyParser= require("body-parser");
-const config = require(__dirname+"/config.js");
+// const config = require(__dirname+"/config.js");
 const date = require(__dirname+"/date.js");
 const ejs = require("ejs");
 
