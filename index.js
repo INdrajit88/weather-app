@@ -1,7 +1,7 @@
 const express = require("express");
 const https = require("https");
 const bodyParser= require("body-parser");
-const config = require("./config.js");
+const config = require(__dirname+"/config.js");
 const date = require(__dirname+"/date.js");
 const ejs = require("ejs");
 
@@ -21,7 +21,8 @@ app.post("/",function(req,res){
     const url="https://api.openweathermap.org/data/2.5/weather?q="+ query +"&units=metric&appid="+key;
     https.get(url,function(response){
         console.log("The status code is: " + response.statusCode);
-        response.on("data",function(data){
+      if( response.statusCode===200 ) {
+            response.on("data",function(data){
             const weatherData = JSON.parse(data);
             const cityNam =req.body.cityName;
             const tem = weatherData.main.temp;
@@ -34,12 +35,12 @@ app.post("/",function(req,res){
             // res.write("<p align='center'>The Weather Description of "+cityNam+" is: "+ "<b> <kbd>" + weatherDes + "</kbd></b>" + " </p>")
             // res.send()
                 res.render("home",{cityName:cityNam,temperature:tem,weatherDescription:weatherDes,imageUrl:imageUrl,time:time})
-        })
-    })
-});
-app.get("/weather",function(req,res){
-
-
+        });
+          }
+          else{
+            res.sendFile(__dirname+"/error.html");
+          }
+    });
 });
 app.listen(3000,function(){
     console.log("server started at port 3000.")
