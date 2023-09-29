@@ -1,7 +1,8 @@
+require('dotenv').config()
 const express = require("express");
 const https = require("https");
 const bodyParser= require("body-parser");
-// const config = require(__dirname+"/config.js");
+const config = require(__dirname+"/config.js");
 const date = require(__dirname+"/date.js");
 const ejs = require("ejs");
 
@@ -42,7 +43,6 @@ app.post("/",function(req,res){
           }
     });
 });
-const port = process.env.PORT || 3000;
-app.listen(port,()=>
-    console.log("server started at port ${port}.")
-);
+app.listen(process.env.PORT, ()=>{
+    console.log("Server is running on port "+ process.env.PORT);
+});
